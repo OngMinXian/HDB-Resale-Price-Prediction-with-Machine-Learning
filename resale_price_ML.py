@@ -109,7 +109,7 @@ for col in df.columns:
     else:
         df[col] = (df[col] - min_d) / (max_d - min_d)
 
-# split data into training and test data with ratio 8:1 respectively
+# split data into training and test data with ratio 9:1 respectively
 train_data = df.sample(frac=0.9, random_state=0)
 test_data = df.drop(train_data.index)
 
@@ -308,6 +308,11 @@ test_predictions = final_nnm.predict(
     verbose=0
 ).flatten()
 
+print('Final cost:', final_nnm.evaluate(
+    X_test,
+    Y_test,
+    verbose=0
+))
 
 pred = test_predictions[:10] * (resale_max - resale_min) + resale_min
 act = Y_test[:10] * (resale_max - resale_min) + resale_min
